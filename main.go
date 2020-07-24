@@ -45,12 +45,7 @@ func RunPowershellCommand(username string, password string, server string, comma
         }
 
         var winRMPost string
-
-        if runtime.GOOS == "windows" {
-                winRMPost = "; Invoke-Command -Session $s -Scriptblock { " + command + " }; Remove-PSSession $s"
-        } else {
-                winRMPost = "; Invoke-Command -Session $s -Scriptblock { powershell '" + command + "' }; Remove-PSSession $s"
-        }
+        winRMPost = "; Invoke-Command -Session $s -Scriptblock { " + command + " }; Remove-PSSession $s"
 
         var winRMCommand string
 
