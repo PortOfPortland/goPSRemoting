@@ -16,10 +16,13 @@ func runCommand(args ...string) (string, error) {
 
         cmd.Stdout = &out 
         cmd.Stderr = &err
-        cmd.Run()
+        exec_err := cmd.Run()
 
         // convert err to an error type if there is an error returned
         var e error
+        if exec_err != nil {
+                e = errors.New(exec_err.Error())
+        }
         if err.String() != "" {
                 e = errors.New(err.String())
         }
